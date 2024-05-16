@@ -1,0 +1,2 @@
+//this script upadte data in the database 
+db.school.update({"name" : "Holberton school"}, {$set:{"address" : "value “972 Mission street"}) 
