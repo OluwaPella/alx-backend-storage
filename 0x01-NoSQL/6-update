@@ -1,2 +1,3 @@
 //this script upadte data in the database 
-db.school.updateMany({"name" : "Holberton school"}, {$set: {"address" : "972 Mission street"}}) 
+db.school.updateMany({"name": "Holberton School"}, {$set: {"address": "972 Mission Street"}})
+
