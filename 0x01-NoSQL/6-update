@@ -1,2 +1,6 @@
 //this script upadte data in the database 
-db.school.update({name: "Holberton School"}, {$set: {address: "972 Mission Street"}}, {multi:true})
+db.school.update(
+  { name: "Holberton school" },
+  { $set: { address: "972 Mission street" } },
+  { multi: true }
+)
