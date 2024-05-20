@@ -5,11 +5,13 @@ doc
 import uuid
 import redis
 from typing import Union
+from functools  import wraps
 
 class Cache:
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
+    @count_calls   
     def store(self, data: Union[str, bytes, int, float ]) -> str:
         """doc method"""
         keyy = str(uuid.uuid4())
@@ -28,4 +30,13 @@ class Cache:
     def get_str(self, key):
         return self.get(key, lambda x: x.decode('utf-8'))
     def get_int(self,key):
-        return self.get(key, lambda x: int(x)) 
+        return self.get(key, lambda x: int(x))
+     
+    def count_calls(self, method):
+        @wraps(method)
+        def wrapper(self, *args, **kwargs): 
+            self._redis.incr(method.__qualname__)
+            result = method(self, *args, **kwargs)
+            return result
+        return wrapper
+
