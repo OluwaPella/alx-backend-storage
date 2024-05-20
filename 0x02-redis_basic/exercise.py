@@ -4,10 +4,10 @@ doc
 """
 import uuid
 import redis
-from typing import callable, Union 
+from typing import Union, Callable 
 from functools  import wraps
 
-def count_calls(method: callable) -> callable:
+def count_calls(method: Callable) -> Callable:
         """
         Decorator function that counts the number of calls made to a method.
         
