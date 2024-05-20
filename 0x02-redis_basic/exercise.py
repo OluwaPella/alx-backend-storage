@@ -11,13 +11,13 @@ class Cache:
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
-    @count_calls   
+    @count_calls
     def store(self, data: Union[str, bytes, int, float ]) -> str:
         """doc method"""
         keyy = str(uuid.uuid4())
         self._redis.set(keyy, data)
         return keyy
-    
+
     def get(self, key, fn=None):
         data = self._redis.get(key)
         if data is None:
