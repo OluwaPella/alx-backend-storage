@@ -10,10 +10,23 @@ class Cache:
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
-    
     def store(self, data: Union[str, bytes, int, float ]) -> str:
         """doc method"""
         keyy = str(uuid.uuid4())
         self._redis.set(keyy, data)
         return keyy
     
+    def get(key, fn=None):
+        data = Cache.get(key)
+        if data is None:
+            return None
+        elif fn is None:
+            return data
+        else:
+            return fn(data) 
+    
+    def get_str(key):
+        return get(key, lambda x: x.decode('utf-8'))
+    
+    def get_int(key):
+        return get(key, lambda x: int(x))
