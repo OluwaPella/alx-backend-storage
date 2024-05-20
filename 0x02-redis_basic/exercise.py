@@ -32,7 +32,7 @@ class Cache:
     def get_int(self,key):
         return self.get(key, lambda x: int(x))
      
-    def count_calls(self, method):
+    def count_calls(method):
         @wraps(method)
         def wrapper(self, *args, **kwargs): 
             self._redis.incr(method.__qualname__)
