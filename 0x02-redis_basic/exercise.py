@@ -7,7 +7,7 @@ import redis
 from typing import Union
 from functools  import wraps
 
-def count_calls(method):
+def count_calls(method: callable) -> callable:
         """
         Decorator function that counts the number of calls made to a method.
         
@@ -19,7 +19,7 @@ def count_calls(method):
 
         """
         @wraps(method)
-        def wrapper(self, *args, **kwargs): 
+        def wrapper(self, *args, **kwargs) -> any: 
             self._redis.incr(method.__qualname__)
             result = method(self, *args, **kwargs)
             return result
