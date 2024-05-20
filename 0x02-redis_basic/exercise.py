@@ -19,12 +19,11 @@ def count_calls(method: callable) -> callable:
 
         """
         @wraps(method)
-        def wrapper(self, *args, **kwargs) -> any: 
+        def wrapper(self,  *args, **kwargs) -> any: 
             self._redis.incr(method.__qualname__)
             result = method(self, *args, **kwargs)
             return result
         return wrapper
-
 
 class Cache:
 
