@@ -26,8 +26,6 @@ class Cache:
             return fn(data) 
     
     def get_str(self, key):
-        node = self.get(key, lambda x: x.decode('utf-8'))
-        return node 
+        return self.get(key, lambda x: x.decode('utf-8'))
     def get_int(self,key):
-        node_get = self.get(key, lambda x: int(x))
-        return node_get
+        return self.get(key, lambda x: int(x)) 
