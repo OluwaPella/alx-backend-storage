@@ -16,8 +16,8 @@ class Cache:
         self._redis.set(keyy, data)
         return keyy
     
-    def get(key, fn=None):
-        data = Cache.get(key)
+    def get(self, key, fn=None):
+        data = self._redis.get(key)
         if data is None:
             return None
         elif fn is None:
