@@ -43,7 +43,16 @@ def call_history(method: Callable) -> Callable:
             self._redis.rpush(method.__qualname__ + ":outputs", output)
             return output
         return wrapper
+def replay(function_name: str) -> None:
+     redis_client = function_name + ":inputs"
+     redis_output = function_name + ":outputs"
+     for i in range(redis_client.llen(redis_output)):
+         input = redis_client.lindex(redis_client, i)
+         output = redis_output.lindex(redis_output, i)
+         print(f"{function_name}(*{input}) -> {output}")
+         
 
+     return None
 class Cache:
 
     def __init__(self):
