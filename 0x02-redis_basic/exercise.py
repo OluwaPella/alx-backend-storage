@@ -46,11 +46,17 @@ def call_history(method: Callable) -> Callable:
 def replay(function_name: str) -> None:
      redis_client = function_name + ":inputs"
      redis_output = function_name + ":outputs"
-     for i in range(redis_client.llen(redis_output)):
+     input_history = redis_client.lrange(redis_client, 0, -1)
+     output_history = redis_output.lrange(redis_output, 0, -1)
+     for i in range(len(input_history)):
          input = redis_client.lindex(redis_client, i)
          output = redis_output.lindex(redis_output, i)
          print(f"{function_name}(*{input}) -> {output}")
-         return None
+     redis_client = function_name + ":inputs"
+     redis_output = function_name + ":outputs"
+     input_history = redis_client.lrange(redis_client, 0, -1)
+     output_history = redis_output.lrange(redis_output, 0, -1)
+   
 class Cache:
 
     def __init__(self):
