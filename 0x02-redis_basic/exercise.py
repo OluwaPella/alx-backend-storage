@@ -50,9 +50,7 @@ def replay(function_name: str) -> None:
          input = redis_client.lindex(redis_client, i)
          output = redis_output.lindex(redis_output, i)
          print(f"{function_name}(*{input}) -> {output}")
-         
-
-     return None
+         return None
 class Cache:
 
     def __init__(self):
